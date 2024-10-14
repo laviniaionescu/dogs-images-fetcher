@@ -11,13 +11,11 @@ def get_dog_image_url(url: str) -> str:
         response = requests.get(url)
         if str(response.status_code).startswith("2"):
             response_dict = json.loads(response.text)
-            # if response_dict.get("status") == "success"
             return response_dict['message']
         else:
             raise Exception(f"Error on getting the image\n"
                             f"Status code {response.status_code}\n"
                             f"{response.text}")
-        print()
     except Exception as e:
         print(f"Error on GET {e}")
 
@@ -43,3 +41,4 @@ def show_images(path: str = "images"):
         image_content = cv2.imread(relative_path)
         cv2.imshow(f"{image_name.replace('.png', '')}", image_content)
         cv2.waitKey(0)
+
